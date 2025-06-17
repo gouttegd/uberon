@@ -1,0 +1,30 @@
+name: Allocate definitive IDs
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/ontology/uberon-edit.obo'
+
+jobs:
+  assign_ids:
+    runs-on: ubuntu-latest
+    container: obolibrary/odkfull:v1.6
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Enable KGCL plugin
+        run: |
+          echo "ROBOT_PLUGINS_DIRECTORY=/tools/robot-plugins/" >> "$GITHUB_ENV"
+
+      - name: Allocate definitive IDs
+        run: |
+          cd src/ontology
+          robot kgcl:mint -i uberon-edit.obo --temp-id-prefix http://purl.obolibrary.org/obo/UBERONTEMP_ --id-range-name KGCL convert -f obo --check false -o uberon-edit.obo
+
+      - name: Commit and push changes
+        uses: actions-js/push@v1.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: "Replace temporary IDs by definitive IDs."
