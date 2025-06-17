@@ -23,6 +23,6 @@ jobs:
       - name: Commit and push changes
         uses: actions-js/push@v1.5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ID_ALLOCATION_TOKEN }}
           message: "Replace temporary IDs by definitive IDs."
           branch: ${{ github.ref }}
