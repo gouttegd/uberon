@@ -5,6 +5,7 @@ on:
     branches: [ master ]
     paths:
       - 'src/ontology/uberon-edit.obo'
+  workflow_dispatch:
 
 jobs:
   assign_ids:
@@ -28,4 +29,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           message: "Replace temporary IDs by definitive IDs."
-          branch: master
+          branch: ${{ github.ref }}
