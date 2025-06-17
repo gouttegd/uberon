@@ -276,3 +276,9 @@ Datatype: idrange:42
         allocatedto: "KGCL"
     EquivalentTo:
         xsd:integer[>= 1200000, < 1300000]
+
+Datatype: idrange:43
+    Annotations:
+        allocatedto: "Temporary IDs"
+    EquivalentTo:
+        xsd:integer[>= 9900000, < 10000000]

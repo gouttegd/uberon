@@ -15,14 +15,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Enable KGCL plugin
-        run: |
-          echo "ROBOT_PLUGINS_DIRECTORY=/tools/robot-plugins/" >> "$GITHUB_ENV"
-
       - name: Allocate definitive IDs
         run: |
           cd src/ontology
-          robot kgcl:mint -i uberon-edit.obo --temp-id-prefix http://purl.obolibrary.org/obo/UBERONTEMP_ --id-range-name KGCL convert -f obo --check false -o uberon-edit.obo
+          make allocate-definitive-ids
 
       - name: Commit and push changes
         uses: actions-js/push@v1.5
