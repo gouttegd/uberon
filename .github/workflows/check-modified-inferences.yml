@@ -59,7 +59,7 @@ jobs:
         #              (3) one logically defined class is gaining more than 10 subclasses.
         id: analysis
         run: |
-          MODIFIED_LOGICAL_DEFS=$(sed -nre '/^Number of classes with modified logical definitions: //p' inference-diff.md)
+          MODIFIED_LOGICAL_DEFS=$(sed -nre 's/^Number of classes with modified logical definitions: //p' inference-diff.md)
           MAX_REMOVED_SUBCLASSES=$(sed -nre 's/^Removed subclasses: //p' | sort -n -r | head -n 1)
           MAX_ADDED_SUBCLASSES=$(sed -nre 's/^Added subclasses: //p' | sort -n -r | head -n 1)
           if [ "$MODIFIED_LOGICAL_DEFS" -eq 0 ]; then
