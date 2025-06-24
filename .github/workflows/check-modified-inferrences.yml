@@ -46,10 +46,10 @@ jobs:
           echo "Added subclasses: 0" >> dummy.md
           cat inference-diff.md dummy.md | \
             sed -nre 's/^Removed subclasses: /INFER_MAX_REMOVED=/p' | \
-            sort -k2 -t= -n -r | head 1 >> $GITHUB_OUTPUT
+            sort -k2 -t= -n -r | head -n 1 >> $GITHUB_OUTPUT
           cat inference-diff.md dummy.md | \
             sed -nre 's/^Added subclasses: /INFER_MAX_ADDED=/p' | \
-            sort -k2 -t= -n -r | head 1 >> $GITHUB_OUTPUT
+            sort -k2 -t= -n -r | head -n 1 >> $GITHUB_OUTPUT
       - name: Prepare comment
         if: steps.collect_results.outputs.INFER_DIFF_N > 0
         run: |
