@@ -81,7 +81,7 @@ jobs:
       - name: Prepare the comment highlighting the changes
         if: steps.analysis.outputs.has_logical_changes == 'true'
         run: |
-          echo "<details>\n<summary>This PR modifies some logical definitions.</summary>\n" > comment.md
+          echo "<details>\n<summary>This PR modifies some logical definitions. See details below:</summary>\n" > comment.md
           cat inference-diff.md >> comment.md
           echo "</details>" >> comment.md
 
@@ -115,7 +115,6 @@ jobs:
       - name: Assign reviewer
         continue-on-error: true
         if: needs.check_inferences.outputs.is_large_scale == 'true'
-        working-directory: head
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
